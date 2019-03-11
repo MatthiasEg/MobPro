@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Persistenz</string>
+
+    <array name="teaSweetener">
+        <item>Süssstoff</item>
+        <item>Assugrin</item>
+        <item>Rohrzucker</item>
+    </array>
+    <array name="teaSweetenerValues">
+        <item>artificial</item>
+        <item>refined</item>
+        <item>natural</item>
+    </array>
+</resources>

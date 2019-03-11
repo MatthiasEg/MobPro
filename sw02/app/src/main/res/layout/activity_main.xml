@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/blackBackground"
+        tools:layout_editor_absoluteX="203dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blackBackground"
+                android:text="@string/main_title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blackBackground"
+                android:text="@string/main_welcomeText"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_section1"
+                android:textColor="@color/blackBackground"
+                android:background="@color/violett"/>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_layoutDemoText"
+                android:textColor="@color/white"
+                android:background="@color/blackBackground"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/blackBackground">
+
+                <RadioButton
+                    android:id="@+id/LinearLayoutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:text="LinearLayout"
+                    android:onClick="startLinearLayout"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/RelativeLayoutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="RelativeLayout"
+                    android:textColor="@color/white"
+                    android:onClick="startRelativeLayout"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/violett"
+                android:text="@string/main_section2"
+                android:textColor="@color/blackBackground" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_section2"
+                android:textColor="@color/white"
+                android:background="@color/blackBackground"/>
+
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/violett"
+                android:text="@string/main_section3"
+                android:textColor="@color/blackBackground" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/buttonText_section4"
+                android:textColor="@color/white"
+                android:background="@color/blackBackground"
+                android:onClick="startViewsDemoActivity"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="507dp"
+                android:background="@color/blackBackground" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
