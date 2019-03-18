@@ -1,25 +1,19 @@
 package ch.hslu.mobpro.persistenz;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
 
 public class MainActivity extends AppCompatActivity {
@@ -99,30 +92,43 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    public void safeData(View view) {
+    public void safeButtonPressed(View view) {
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
-        File outFile;
 
         if (checkBox.isChecked()) {
-            this.loadExtFilePermission();
-
-            File root = Environment.getExternalStorageDirectory();
-            File dir = new File(root.getAbsolutePath() + "/data");
-            dir.mkdirs();
-            outFile = new File(dir, FILE_NAME);
-
-
+            writeFileExternal();
         } else {
-            File root = this.getFilesDir();
-            File dir = new File(root.getAbsolutePath() + "/data");
-            dir.mkdirs();
-            outFile = new File(dir, FILE_NAME);
-
+            writeFileInternal();
         }
 
+
+    }
+
+
+    private void writeFileExternal() {
+        this.checkExtWritePermissions();
+
+        File root = Environment.getExternalStorageDirectory();
+        File dir = new File(root.getAbsolutePath() + "/data");
+        dir.mkdirs();
+        File file = new File(dir, FILE_NAME);
+
+        writeFile(file);
+
+    }
+
+    private void writeFileInternal() {
+        File root = this.getFilesDir();
+        File dir = new File(root.getAbsolutePath() + "/data");
+        dir.mkdirs();
+        File file = new File(dir, FILE_NAME);
+        writeFile(file);
+    }
+
+    private void writeFile(File fileToWriteTo) {
         Writer writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(outFile));
+            writer = new BufferedWriter(new FileWriter(fileToWriteTo));
             EditText editText = (EditText) findViewById(R.id.editText);
             writer.append(editText.getText());
 
@@ -138,19 +144,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void loadData(View view) {
+
+    public void loadButtonPressed(View view) {
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
-        File fileToRead;
 
         if (checkBox.isChecked()) {
-            loadExtFilePermission();
-            File root = Environment.getExternalStorageDirectory();
-            fileToRead = new File(root.getAbsolutePath() + "/data/notes.txt");
+            readFileExternal();
+
         } else {
-            File root = this.getFilesDir();
-            fileToRead = new File(root.getAbsolutePath() + "/data/notes.txt");
+            readFileInternal();
 
         }
+
+    }
+
+    private void readFileInternal() {
+        File root = this.getFilesDir();
+        File fileToRead = new File(root.getAbsolutePath() + "/data/notes.txt");
+
+        readFile(fileToRead);
+
+    }
+
+    private void readFileExternal() {
+        checkExtReadPermission();
+        File root = Environment.getExternalStorageDirectory();
+        File fileToRead = new File(root.getAbsolutePath() + "/data/notes.txt");
+
+        readFile(fileToRead);
+    }
+
+
+    private void readFile(File fileToRead) {
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileToRead));
@@ -167,27 +192,50 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
     }
 
 
-    public boolean loadExtFilePermission() {
+    private void checkExtReadPermission() {
+        int readGrant = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (readGrant != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 25);
+        } else {
+            Toast.makeText(MainActivity.this, "Read permission already granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void checkExtWritePermissions() {
         int writeGrant = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (writeGrant != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 24);
         } else {
-            return true;
+            Toast.makeText(MainActivity.this, "Write permission already granted", Toast.LENGTH_SHORT).show();
         }
-        return false;
-    }
-    
 
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case 24: //load file
+            case 24: //write external
 
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permission" + permissions[0] + " denied!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //permission was granted
+                    this.writeFileExternal();
+                    break;
+                }
+
+            case 25: //read external
+
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission" + permissions[0] + " denied!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //permission was granted
+                    this.readFileExternal();
+                    break;
                 }
         }
     }

@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Speichern"
-                android:onClick="safeData"/>
+                android:onClick="safeButtonPressed"/>
 
             <Button
                 android:id="@+id/button4"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Laden"
-                android:onClick="loadData"/>
+                android:onClick="loadButtonPressed"/>
         </RadioGroup>
     </LinearLayout>
 
