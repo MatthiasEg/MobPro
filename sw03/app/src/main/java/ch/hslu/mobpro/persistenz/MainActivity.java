@@ -100,20 +100,20 @@ public class MainActivity extends AppCompatActivity {
         } else {
             writeFileInternal();
         }
-
-
     }
 
-
     private void writeFileExternal() {
-        this.checkExtWritePermissions();
+        if(this.checkExtWritePermissions()){
 
-        File root = Environment.getExternalStorageDirectory();
-        File dir = new File(root.getAbsolutePath() + "/data");
-        dir.mkdirs();
-        File file = new File(dir, FILE_NAME);
+            File root = Environment.getExternalStorageDirectory();
+            File dir = new File(root.getAbsolutePath() + "/data");
+            dir.mkdirs();
+            File file = new File(dir, FILE_NAME);
+            writeFile(file);
+        }
 
-        writeFile(file);
+
+
 
     }
 
@@ -145,6 +145,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void readFileExternal() {
+
+        if(checkExtReadPermission()){
+            File root = Environment.getExternalStorageDirectory();
+            File fileToRead = new File(root.getAbsolutePath() + "/data/notes.txt");
+
+            readFile(fileToRead);
+
+        }
+
+    }
+
     public void loadButtonPressed(View view) {
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
 
@@ -164,14 +176,6 @@ public class MainActivity extends AppCompatActivity {
 
         readFile(fileToRead);
 
-    }
-
-    private void readFileExternal() {
-        checkExtReadPermission();
-        File root = Environment.getExternalStorageDirectory();
-        File fileToRead = new File(root.getAbsolutePath() + "/data/notes.txt");
-
-        readFile(fileToRead);
     }
 
 
@@ -195,21 +199,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void checkExtReadPermission() {
+    private boolean checkExtReadPermission() {
         int readGrant = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
         if (readGrant != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 25);
+            return false;
         } else {
             Toast.makeText(MainActivity.this, "Read permission already granted", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 
-    public void checkExtWritePermissions() {
+    public boolean checkExtWritePermissions() {
         int writeGrant = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (writeGrant != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 24);
+            return false;
         } else {
             Toast.makeText(MainActivity.this, "Write permission already granted", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
     }
