@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">sw05</string>
+    <string name="musicplayerservice_descv">Description des MP-Service</string>
+</resources>
