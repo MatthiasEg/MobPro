@@ -8,7 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String CHANNEL_ID = "Notification ID SW05";
+    public final static String CHANNEL_ID = "ChannelSW05";
 
 
     @Override

@@ -3,18 +3,20 @@ package ch.hslu.mobpro.sw05;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
-public final class MusicPlayerService extends Service{
+public final class MusicPlayerService extends Service {
 
-    private Thread playThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-
-        }
-    });
+    private Thread playThread;
     private static final int NOTIFICATION_ID = 123;
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -23,8 +25,8 @@ public final class MusicPlayerService extends Service{
     }
 
     private void startPlayer() {
-        if (playThread != null && playThread.isAlive()){
-            return ;
+        if (playThread != null && playThread.isAlive()) {
+            return;
         }
         startPlayThread();
         startForeground(NOTIFICATION_ID, createNotification("Playing.."));
@@ -44,6 +46,15 @@ public final class MusicPlayerService extends Service{
     }
 
     private void startPlayThread() {
+
+        playThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MediaPlayer player = (MediaPlayer) MediaPlayer.create(MusicPlayerService.this, R.raw.test);
+                player.start();
+            }
+        });
+
         playThread.start();
     }
 
