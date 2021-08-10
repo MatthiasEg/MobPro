@@ -1,6 +1,7 @@
 package ch.hslu.mobpro.persistenz;
 
 import android.Manifest;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
     }
 
 
@@ -249,4 +252,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void createNote(View view) {
+        Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("whichNoteView", -l1L);
+        startActivity(intent);
+
+    }
+
+    public void showNotes(View view) {
+        Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("whichNoteView", 1L);
+        startActivity(intent);
+    }
 }

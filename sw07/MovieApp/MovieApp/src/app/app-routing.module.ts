@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: './search/search.module#SearchPageModule'
+  },
+  {
+    path: 'detail',
+    loadChildren: './detail/detail.module#DetailPageModule'
   }
 ];
 
@@ -27,4 +31,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

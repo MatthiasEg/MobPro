@@ -7,25 +7,54 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <ScrollView
-        android:la§xyout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Kommunikation" />
+
+    <Button
+        android:id="@+id/Kommunikation_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kommunikation mit http-Server" />
+
+    <Button
+        android:id="@+id/httpDemos_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HTTP Demos"
+        android:onClick="HTTPDemosButtonPressed"/>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Nebenläufigkeit" />
+
+    <Button
+        android:id="@+id/gui7secblock_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GUI 7 Sekunden Blockieren" />
+
+    <Button
+        android:id="@+id/asynchdemo_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ASYNCHDEMOTASK starten" />
+
+    <Button
+        android:id="@+id/demoThread_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="demoThreadButton"
+        android:text="DemoThread starten" />
+
+    <Button
+        android:id="@+id/asynchMultiTask_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AsynchMultiTask starten" />
 
 </LinearLayout>

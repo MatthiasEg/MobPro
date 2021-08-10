@@ -1,26 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {NativePage} from '../native/native.page';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: 'home.page.html',
-    styleUrls: ['home.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-    public battery: string;
-
-    constructor(
-        public navCtrl: NavController
-    ) {
-
-    }
-
-    pushNativePage() {
-        this.navCtrl.push(NativePage);
-    }
-
-    ngOnInit() {
-    }
 }

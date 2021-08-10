@@ -30,6 +30,9 @@ public class AppPreferenceActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
 
+
+
+
         }
 
     }

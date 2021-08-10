@@ -1,18 +1,24 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Movie App</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Movie App
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <h3>Welcome Movie Fans!</h3>
-    <p>This is a simple demo movie app.</p>
-    <button ion-button secondary (click)="pushNativePage()">show native demo</button>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Welcome Movie Fans</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>This is a simple demo movie app.</p>
+      <ion-button color="primary">Show native demo</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
-<ion-footer>
-    <p style="text-align: right">Movie App / HSLU I</p>
-</ion-footer>
+<app-footer></app-footer>

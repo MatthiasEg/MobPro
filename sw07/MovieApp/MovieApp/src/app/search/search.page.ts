@@ -1,53 +1,45 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Movie} from '../../interfaces/Movie';
-
-import {NavController} from 'ionic-angular';
-import {DetailsModule} from '../details/details.module';
-import {DetailsPage} from '../details/details.page';
-
+import { Component, OnInit } from '@angular/core';
+import { MovieService } from 'src/core/movie.service';
+import { Movie } from 'src/interfaces/movie';
+import { AlertController, NavController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-    selector: 'app-search',
-    templateUrl: 'search.page.html',
-    styleUrls: ['search.page.scss']
+  selector: 'app-search',
+  templateUrl: './search.page.html',
+  styleUrls: ['./search.page.scss'],
 })
+export class SearchPage implements OnInit {
 
+  searchTerm: string = "";
 
-export class SearchPage {
-    searchQuery: string;
+  constructor(
+    private _movieService: MovieService,
+    private _alertController: AlertController,
+    private _navController: NavController) { }
+    private _httpClient: HttpClient
 
-    constructor(
-        private httpClient: HttpClient,
-        private navController: NavController
-    ) {
+  ngOnInit() {
+  }
 
+  public async searchForMovie() {
+    let movieResult = await this._movieService.searchMovie(this.searchTerm);
+    if (movieResult.Response == 'True') {
+      this.routeToDetailView(movieResult);
+    } else {
+      await this.showErrorAlert(movieResult.Error);
     }
+  }
 
-    searchButtonPressed() {
-        const movieJson = this.httpClient.get('http://www.omdbapi.com/?apikey=4f04280a&plot=short&r=json&t=' + this.searchQuery);
-
-        async function presentAlert() {
-            const alertController = document.querySelector('ion-alert-controller');
-            await alertController.componentOnReady();
-
-            const alert = await alertController.create({
-                header: 'Error',
-                subHeader: 'here is the subtitle',
-                message: 'Ups, something went wrong. Server message was: "Movie not found!"',
-                buttons: ['TRY AGAIN...']
-            });
-            return await alert.present();
-        }
-
-        movieJson.subscribe(data => {
-            const movie: Movie = <Movie>data;
-            const detailModule = new DetailsPage(movie);
-            if (movie.Response === 'True') {
-                this.navController.push(detailModule.getPage());
-            } else {
-                presentAlert();
-            }
-        });
-    }
+  private async showErrorAlert(errorMessage: string) {
+    const alert = await this._alertController.create({
+      header: 'Error',
+      message: errorMessage,
+      buttons: ['Try again']
+    });
+    return await alert.present();
+  }
+  private routeToDetailView(movieResult: Movie) {
+    this._navController.navigateForward(['/detail', movieResult.Title]);
+  }
 }

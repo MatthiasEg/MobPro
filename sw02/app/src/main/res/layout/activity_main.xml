@@ -15,6 +15,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -40,23 +41,23 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/violett"
                 android:text="@string/main_section1"
-                android:textColor="@color/blackBackground"
-                android:background="@color/violett"/>
+                android:textColor="@color/blackBackground" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/blackBackground"
                 android:text="@string/main_layoutDemoText"
-                android:textColor="@color/white"
-                android:background="@color/blackBackground"/>
+                android:textColor="@color/white" />
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/blackBackground">
+                android:background="@color/blackBackground"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/LinearLayoutButton"
@@ -64,18 +65,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="false"
-                    android:text="LinearLayout"
                     android:onClick="startLinearLayout"
-                    android:textColor="@color/white"/>
+                    android:text="LinearLayout"
+                    android:textColor="@color/white" />
 
                 <RadioButton
                     android:id="@+id/RelativeLayoutButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="startRelativeLayout"
                     android:text="RelativeLayout"
-                    android:textColor="@color/white"
-                    android:onClick="startRelativeLayout"/>
+                    android:textColor="@color/white" />
 
             </RadioGroup>
 
@@ -91,9 +92,9 @@
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/blackBackground"
                 android:text="@string/text_section2"
-                android:textColor="@color/white"
-                android:background="@color/blackBackground"/>
+                android:textColor="@color/white" />
 
 
             <TextView
@@ -108,15 +109,48 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/buttonText_section4"
-                android:textColor="@color/white"
                 android:background="@color/blackBackground"
-                android:onClick="startViewsDemoActivity"/>
+                android:onClick="startViewsDemoActivity"
+                android:text="@string/buttonText_section4"
+                android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="507dp"
-                android:background="@color/blackBackground" />
+                android:layout_height="wrap_content"
+                android:text="Wähle einen Informatik-Kurs" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blackBackground"
+                android:entries="@array/ITCourses" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Zustandsspeicherung"
+                android:textColor="@color/blackBackground" />
+
+            <TextView
+                android:id="@+id/zählerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Zähler = 0" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Drücke den Knopf einige Male." />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hochzählen!!" />
 
 
         </LinearLayout>
